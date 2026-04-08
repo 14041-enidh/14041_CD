@@ -1,4 +1,4 @@
-Este README serve como relatório para o laboratório da calculadora com clientes e servidores que comunicam intercaladamente entre si.
+Este README serve como relatório para o laboratório AulaPratica-02-Sockets.pdf
 
 1- Introdução:
 
