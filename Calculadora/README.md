@@ -2,7 +2,7 @@ Este README serve como relatório para o laboratório AulaPratica-02-Sockets.pdf
 
 1- Introdução:
 
-  O laboratório tinha o objetivo de estudar e implementar o modelo de comunicação cliente/servidor utilizando sockets com as lingus de programação Python e Java.
+  O laboratório tinha o objetivo de estudar e implementar o modelo de comunicação cliente/servidor utilizando sockets com as linguas de programação Python e Java.
   
 2- Sockets:
 
@@ -26,4 +26,4 @@ Este README serve como relatório para o laboratório AulaPratica-02-Sockets.pdf
 
 6- Conclusão:
 
-  Este laboraatório serviu-nos bastante para estudar e aprender a implementar os conceitos estudados nas aulas, mencionados neste relatório, tais como Sockets, modelos de comunicação e JSON, o que nos vai ajudar futuramente na implementação destes conceitos no nosso projeto final.
+  Este laboratório serviu-nos bastante para estudar e aprender a implementar os conceitos estudados nas aulas, mencionados neste relatório, tais como Sockets, modelos de comunicação e JSON, o que nos vai ajudar futuramente na implementação destes conceitos no nosso projeto final.
