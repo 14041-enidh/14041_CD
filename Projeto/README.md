@@ -37,6 +37,7 @@ Nesta segunda fase do projeto de Computação Distribuída, o objetivo principal
 
   Objetivo 3: Arquitetura com três contentores
     O compose.yml foi atualizado para definir três serviços: flask_app, api e db. Foram criadas duas redes Docker distintas: a frontend_network (10.10.1.0/24) que liga o flask_app à api, e a backend_network (10.10.2.0/24) que liga a api ao db. Foi também criado um DockerfileAPI para construir a imagem do contentor da API, utilizando a porta 5000.
+    Observação: A subnet foi alterada de 192.168.100.0/24 para 10.10.1.0/24 e 10.10.2.0/24 porque a rede criada na Fase 1 já ocupava o intervalo anterior, e o Docker não permite duas redes com endereços sobrepostos.
 
   Objetivo 4: Isolamento da Base de Dados
     O contentor db está exclusivamente na backend_network, sendo completamente inacessível a partir do exterior e também inacessível pelo flask_app diretamente. Apenas o contentor api consegue comunicar com ele. Isto garante um isolamento mais forte do que na Fase 1, onde o flask_app comunicava diretamente com o db.
