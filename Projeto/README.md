@@ -5,7 +5,7 @@ Para iniciar o servidor, basta, abrir a aplicação do docker, fazer cd para a p
 "docker compose up --build"
 O resultado foi o conjunto das seguintes fases:
 
-=====================================================================================================================================================================================================
+=======================================================================================================
 
 Fase 1 - 21/04/2026
 
@@ -23,7 +23,7 @@ Nesta primeira fase do projeto de Computação Distribuida foram-nos pedidos dif
   Objetivo 4: Só o contentor Web é acessível do exterior.
     No compose.yml, apenas o flask_app tem ports: "80:80", enquanto o  contentor db não tem nenhum mapeamento de portas, o que significa que a porta 12345 nunca é acessível desde a web, fica exclusivamente acessível dentro da rede Docker interna.
 
-=====================================================================================================================================================================================================
+=======================================================================================================
 
 Fase 2 – 17/05/2026
 
