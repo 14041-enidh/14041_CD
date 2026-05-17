@@ -1,13 +1,14 @@
 Este README serve como relatório para o projeto da cadeira de Computação Distribuida.
+
 Introdução:
-____________________
-Para iniciar o servidor, basta, abrir a aplicação do docker, fazer cd para a pasta /app na terminal e correr o código:
+Para iniciar o servidor, basta, abrir a aplicação do docker, fazer cd para a pasta /app do projeto na terminal e correr o código:
 "docker compose up --build"
 O resultado foi o conjunto das seguintes fases:
 
-21/04/2026
+=====================================================================================================================================================================================================
 
-Fase 1:
+Fase 1 - 21/04/2026
+
 Nesta primeira fase do projeto de Computação Distribuida foram-nos pedidos diferentes objetivos, os quais com a aprendizagem dos laboratórios, fomos capazes de cumprir. A ideia principal desta fase era adaptar o trabalho prático desenvolvido na Unidade Curricular de Programação Web para um ambiente de contentores de acordo com os seguintes objetivos:
 
   Objetivo 1: Separar a persistência de dados do backend Web.
@@ -21,3 +22,25 @@ Nesta primeira fase do projeto de Computação Distribuida foram-nos pedidos dif
 
   Objetivo 4: Só o contentor Web é acessível do exterior.
     No compose.yml, apenas o flask_app tem ports: "80:80", enquanto o  contentor db não tem nenhum mapeamento de portas, o que significa que a porta 12345 nunca é acessível desde a web, fica exclusivamente acessível dentro da rede Docker interna.
+
+=====================================================================================================================================================================================================
+
+Fase 2 – 17/05/2026
+
+Nesta segunda fase do projeto de Computação Distribuída, o objetivo principal foi introduzir uma API REST como intermediário entre o backend Web e a base de dados, tornando a arquitetura mais modular, segura e alinhada com os princípios de sistemas distribuídos.
+
+  Objetivo 1: Introdução de uma API REST como intermediário
+    Na Fase 1, o Server.py comunicava diretamente com o servidor de base de dados via socket TCP. Na Fase 2, essa comunicação direta foi eliminada. Ffoi criado um novo servidor intermédio, o Server_api.py, que funciona como ponte entre os dois, usando métodos HTTP, GET /load para carregar dados e POST /save para os guardar. O  Server.py passou a enviar pedidos HTTP a este servidor para carregar ou guardar dados, sem precisar de saber como esses dados são guardados.
+
+  Objetivo 2: Manutenção da comunicação TCP entre a API e a Base de Dados
+    O Server_db.py manteve-se sem alterações. A API REST é que assume agora o papel de cliente TCP, comunicando com o servidor de base de dados na porta 12345 através de mensagens JSON com o campo action (load ou save). Esta abordagem reutilizou o protocolo já implementado na Fase 1, minimizando o trabalho necessário.
+
+  Objetivo 3: Arquitetura com três contentores
+    O compose.yml foi atualizado para definir três serviços: flask_app, api e db. Foram criadas duas redes Docker distintas: a frontend_network (10.10.1.0/24) que liga o flask_app à api, e a backend_network (10.10.2.0/24) que liga a api ao db. Foi também criado um DockerfileAPI para construir a imagem do contentor da API, utilizando a porta 5000.
+
+  Objetivo 4: Isolamento da Base de Dados
+    O contentor db está exclusivamente na backend_network, sendo completamente inacessível a partir do exterior e também inacessível pelo flask_app diretamente. Apenas o contentor api consegue comunicar com ele. Isto garante um isolamento mais forte do que na Fase 1, onde o flask_app comunicava diretamente com o db.
+
+  Objetivo 5: Único ponto de acesso exterior
+    Apenas o contentor flask_app tem mapeamento de portas (80:80), sendo o único acessível pelo browser do utilizador. A api e o db não têm portas expostas ao exterior, garantindo que toda a comunicação passa obrigatoriamente pelo backend Web.
+    =====================================================================================================================================================================================================
